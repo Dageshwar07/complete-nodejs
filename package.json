@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "-": "^0.0.1"
+  },
+  "name": "complete-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+  "start": "node index.js",
+"dev":"nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
