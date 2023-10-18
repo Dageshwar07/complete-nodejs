@@ -90,7 +90,7 @@ const express = require('express')
 const app = express()
 
 const publicPath = path.join(__dirname, 'public')
-app.use(express.static(publicPath))
+// app.use(express.static(publicPath))
 
 // app.get('/', (req, res) => {
 //     res.send("hello this is front page page",`<a href="/index.html">goto home</a>`)
@@ -106,4 +106,45 @@ app.use(express.static(publicPath))
 //     )
 //     res.send("welcome " + req.query.name + ' in user page' + '<a href="/about" /> about')
 // })
+
+// file without extension
+// app.get('/index', (req, res) => {
+//     res.sendFile(`${publicPath}/index.html`)
+// })
+// app.get('/about', (req, res) => {
+//     res.sendFile(`${publicPath}/about.html`)
+// })
+// app.get('*', (req, res) => {
+//     res.sendFile(`${publicPath}/404.html`)
+// })
+
+// middleware
+// application level
+
+const reqFilter = (req, res, next) => {
+    console.log("req filter")
+    if (!req.query.age) {
+        res.send("please provide age")
+    }
+    else if (req.query.age < 18) {
+        res.send("you can not acces this page")
+    }
+    else {
+        next();
+
+    }
+}
+
+app.use(reqFilter)
+
+app.get('/', (req, res) => {
+    res.send("welcome to home page")
+    console.log("welcome to home page")
+})
+
+app.get('/user', (req, res) => {
+    res.send("welcome to user page")
+    console.log("welcome to user page")
+})
+
 app.listen(4000)
