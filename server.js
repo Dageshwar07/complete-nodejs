@@ -135,14 +135,15 @@ const reqFilter = (req, res, next) => {
     }
 }
 
-app.use(reqFilter)
+// app.use(reqFilter)
 
 app.get('/', (req, res) => {
     res.send("welcome to home page")
     console.log("welcome to home page")
 })
 
-app.get('/user', (req, res) => {
+// route level middleware
+app.get('/user',reqFilter, (req, res) => {
     res.send("welcome to user page")
     console.log("welcome to user page")
 })
