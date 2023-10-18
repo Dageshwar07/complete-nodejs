@@ -81,21 +81,29 @@
 
 // })
 
+
 // express
 
+const fs = require('fs')
+const path = require('path')
 const express = require('express')
 const app = express()
 
+const publicPath = path.join(__dirname, 'public')
+app.use(express.static(publicPath))
 
-app.get('/',(req, res) => {
-    res.send("hello this is home page")
-})
-app.get('/about',(req, res) => {
-    res.send("hello this is about page")
-})
-app.get('/user', (req, res) => {
-    console.log("data send by browser", req.query.name
-    )
-    res.send("welcome "+req.query.name+' in user page')
-})
+// app.get('/', (req, res) => {
+//     res.send("hello this is front page page",`<a href="/index.html">goto home</a>`)
+// })
+// app.get('/about', (req, res) => {
+//     res.send(`<input type="text" value="${req.query.name}"
+//         placeholder="enter the name"/><a href="/user"/>user`)
+
+
+// })
+// app.get('/user', (req, res) => {
+//     console.log("data send by browser", req.query.name
+//     )
+//     res.send("welcome " + req.query.name + ' in user page' + '<a href="/about" /> about')
+// })
 app.listen(4000)
