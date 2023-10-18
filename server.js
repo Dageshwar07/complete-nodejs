@@ -88,6 +88,7 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 const app = express()
+const middleware = require('./middleware')
 
 const publicPath = path.join(__dirname, 'public')
 // app.use(express.static(publicPath))
@@ -131,19 +132,20 @@ const reqFilter = (req, res, next) => {
     }
     else {
         next();
-
     }
 }
-
-// app.use(reqFilter)
-
+app.use(reqFilter)
 app.get('/', (req, res) => {
     res.send("welcome to home page")
     console.log("welcome to home page")
 })
 
 // route level middleware
-app.get('/user',reqFilter, (req, res) => {
+app.get('/admin', middleware, (req, res) => {
+    res.send("welcome to admin page")
+    console.log("welcome to admin page")
+})
+app.get('/user', reqFilter, (req, res) => {
     res.send("welcome to user page")
     console.log("welcome to user page")
 })
